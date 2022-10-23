@@ -25,7 +25,7 @@
               packages =
                 with pkgs;
                 [
-                  nodejs-16_x
+                  nodejs-18_x
                   bun # for dev:run
                 ];
 
