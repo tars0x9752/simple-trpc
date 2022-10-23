@@ -2,8 +2,10 @@
   "name": "node-lib",
   "version": "0.1.0",
   "description": "a basic nodejs template",
+  "type": "module",
   "scripts": {
-    "dev": "bun src/main.ts",
+    "serve": "npm run build && node dist/server.js",
+    "client": "npm run build && node dist/client.js",
     "build": "tsc",
     "clean": "rimraf dist",
     "lint:eslint": "eslint .",

@@ -1,4 +1,5 @@
 import { initTRPC } from '@trpc/server'
+import { createHTTPServer } from '@trpc/server/adapters/standalone'
 import { z } from 'zod'
 
 const t = initTRPC.create()
@@ -16,6 +17,20 @@ const userList: User[] = [
 ]
 
 const appRouter = t.router({
+  greet: t.procedure
+    .input((val: unknown) => {
+      if (typeof val === 'string') {
+        return val
+      }
+
+      throw new Error(`Invalid input: ${typeof val}`)
+    })
+    .query(({ input }) => {
+      return {
+        greeting: `Hello ${input}`,
+      }
+    }),
+
   userById: t.procedure
     .input((val: unknown) => {
       if (typeof val === 'string') {
@@ -51,3 +66,12 @@ const appRouter = t.router({
 // to avoid accidentally importing your API
 // into client-side code
 export type AppRouter = typeof appRouter
+
+createHTTPServer({
+  router: appRouter,
+  createContext() {
+    return {}
+  },
+}).listen(8080)
+
+console.log("server started at localhost:8080")
