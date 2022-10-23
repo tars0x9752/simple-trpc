@@ -12,7 +12,11 @@ type User = {
 const userList: User[] = [
   {
     id: '1',
-    name: 'KAT',
+    name: 'tars',
+  },
+  {
+    id: '2',
+    name: 'mars',
   },
 ]
 
